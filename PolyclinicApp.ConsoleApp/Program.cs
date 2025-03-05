@@ -1,16 +1,18 @@
-﻿
+﻿using System.Reflection;
+using PolyclinicApp.ClassLibrary;
+using PolyclinicApp.ClassLibrary.Models;
 
 namespace PolyclinicApp.ConsoleApp
 {
     public class Program
     {
-        //static PolyclinicDBContext context;
-        //static PolyclinicRepository repository;
+        static PolyclinicDbContext context;
+        static PolyclinicRepository repository;
 
         static Program()
         {
-            //context = new PolyclinicDBContext();
-            //repository = new PolyclinicRepository(context);
+            context = new PolyclinicDbContext();
+            repository = new PolyclinicRepository(context);
         }
 
         static void Main(string[] args)
@@ -20,7 +22,7 @@ namespace PolyclinicApp.ConsoleApp
             //TestCancelAppointment();  
             //TestFetchAllAppointments(); 
             //TestGetDoctorAppointmentUsingUSP();  
-            //TestGetPatientDetails(); 
+            TestGetPatientDetails(); 
             // TestUpdatePatientAge(); 
 
         }
@@ -116,11 +118,16 @@ namespace PolyclinicApp.ConsoleApp
         #region TestGetPatientDetails
         public static void TestGetPatientDetails()
         {
-            //var patientDetails = repository.GetPatientDetails("P104");
-            //Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
-            //Console.WriteLine("{0,-10}{1,-15}{2,-5}{3,-10}{4,-15}", "PatientID", "PatientName", "Age", "Gender", "ContactNumber");
-            //Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
-            //Console.WriteLine("{0,-10}{1,-15}{2,-5}{3,-10}{4,-15}", patientDetails.PatientId, patientDetails.PatientName, patientDetails.Age, patientDetails.Gender, patientDetails.ContactNumber);
+            var patientDetails = repository.GetPatientDetails("P104");
+            if (patientDetails == null)
+            {
+                Console.WriteLine("Patient with ID 'P10445' not found.");
+                return; // Exit the method early
+            }
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("{0,-10}{1,-15}{2,-5}{3,-10}{4,-15}", "PatientID", "PatientName", "Age", "Gender", "ContactNumber");
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("{0,-10}{1,-15}{2,-5}{3,-10}{4,-15}", patientDetails.PatientId, patientDetails.PatientName, patientDetails.Age, patientDetails.Gender, patientDetails.ContactNumber);
         }
         #endregion
 
