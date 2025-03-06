@@ -20,7 +20,7 @@ namespace PolyclinicApp.ConsoleApp
             //TestAddNewPatientDetails(); 
             //TestCalculateDoctorFees();  
             //TestCancelAppointment();  
-            //TestFetchAllAppointments(); 
+            //TestFetchAllAppointments();
             //TestGetDoctorAppointmentUsingUSP();  
             //TestGetPatientDetails(); 
             //TestUpdatePatientAge(); 
@@ -70,31 +70,31 @@ namespace PolyclinicApp.ConsoleApp
         #region TestCancelAppointment
         public static void TestCancelAppointment()
         {
-            //int result = repository.CancelAppointment(9);
+            int result = repository.CancelAppointment(9);
 
-            //if (result > 0)
-            //{
-            //    Console.WriteLine("The appointment is cancelled successfully.");
-            //}
+            if (result > 0)
+            {
+                Console.WriteLine("The appointment is cancelled successfully.");
+            }
 
-            //else
-            //{
-            //    Console.WriteLine("The appointmentNo is not available or some error occured during cancelling.");
-            //}
+            else
+            {
+                Console.WriteLine("The appointmentNo is not available or some error occured during cancelling.");
+            }
         }
         #endregion
 
         #region TestFetchAllAppointments
         public static void TestFetchAllAppointments()
         {
-            //var appointments = repository.FetchAllAppointments("D1", new DateTime(2022, 12, 30));
-            //Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
-            //Console.WriteLine("{0,-15}{1,-15}{2,-10}{3,-15}{4}", "DoctorName", "Specialization", "PatientId", "PatientName", "AppointmentNo");
-            //Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
-            //foreach (var meet in appointments)
-            //{
-            //    Console.WriteLine("{0,-15}{1,-15}{2,-10}{3,-15}{4}", meet.DoctorName, meet.Specialization, meet.PatientId, meet.PatientName, meet.AppointmentNo);
-            //}
+            var appointments = repository.FetchAllAppointments("D1", new DateTime(2025, 03, 20)); //2025-03-20
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("{0,-15}{1,-15}{2,-10}{3,-15}{4}", "DoctorName", "Specialization", "PatientId", "PatientName", "AppointmentNo");
+            Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+            foreach (var meet in appointments)
+            {
+                Console.WriteLine("{0,-15}{1,-15}{2,-10}{3,-15}{4}", meet.DoctorName, meet.Specialization, meet.PatientId, meet.PatientName, meet.AppointmentNo);
+            }
         }
         #endregion
 

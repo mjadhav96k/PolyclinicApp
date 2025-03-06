@@ -1,4 +1,6 @@
-﻿using PolyclinicApp.ClassLibrary.Models;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using PolyclinicApp.ClassLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +58,41 @@ namespace PolyclinicApp.ClassLibrary
             }
             return status;
         }
+
+        public int CancelAppointment(int appointmentNo)
+        {
+            int rowsAffected = 0;
+            try
+            {
+                context.Appointments.Remove(context.Appointments.Find(appointmentNo));
+                rowsAffected = context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                rowsAffected = -1;
+                throw;
+            }
+            return rowsAffected;
+        }
+
+        public List<ListOfAppointments> FetchAllAppointments(string doctorId, DateTime date)
+        {
+            List<ListOfAppointments> appointments = new List<ListOfAppointments>();
+            try
+            {
+                SqlParameter prmDoctorId = new SqlParameter("@DoctorID", doctorId);
+                SqlParameter prmDateOfAppointment = new SqlParameter("@DateofAppointment", date);
+                appointments = context.ListOfAppointments
+                    .FromSqlRaw("SELECT * FROM dbo.ufn_FetchAllAppointments(@DoctorID,@DateofAppointment)", prmDoctorId, prmDateOfAppointment)
+                    .ToList();
+            }
+            catch (Exception)
+            {
+                appointments = null;
+                throw;
+            }
+            return appointments;
+        } 
 
     }
 }
