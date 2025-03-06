@@ -22,31 +22,31 @@ namespace PolyclinicApp.ConsoleApp
             //TestCancelAppointment();  
             //TestFetchAllAppointments(); 
             //TestGetDoctorAppointmentUsingUSP();  
-            TestGetPatientDetails(); 
-            // TestUpdatePatientAge(); 
+            //TestGetPatientDetails(); 
+            //TestUpdatePatientAge(); 
 
         }
 
         #region TestAddNewPatientDetails
         public static void TestAddNewPatientDetails()
         {
-            //Patient patientObj = new Patient();
+            Patient patientObj = new Patient();
 
-            //patientObj.PatientId = "P113";
-            //patientObj.PatientName = "Joseph Kuruvila";
-            //patientObj.Age = 26;
-            //patientObj.Gender = "M";
-            //patientObj.ContactNumber = "7540432730";
+            patientObj.PatientId = "P113";
+            patientObj.PatientName = "Joseph Kuruvila";
+            patientObj.Age = 26;
+            patientObj.Gender = "M";
+            patientObj.ContactNumber = "7540432730";
 
-            //bool result = repository.AddNewPatientDetails(patientObj);
-            //if (result)
-            //{
-            //    Console.WriteLine("New Patient Details added successfully and PatientId = " + patientObj.PatientId + ".");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Something went wrong. Try again!");
-            //}
+            bool result = repository.AddNewPatientDetails(patientObj);
+            if (result)
+            {
+                Console.WriteLine("New Patient Details added successfully and PatientId = " + patientObj.PatientId + ".");
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong. Try again!");
+            }
 
         }
         #endregion
@@ -134,16 +134,16 @@ namespace PolyclinicApp.ConsoleApp
         #region TestUpdatePatientAge
         public static void TestUpdatePatientAge()
         {
-        //    bool result = repository.UpdatePatientAge("P111", 53);
+            bool result = repository.UpdatePatientAge("P113", 53);
 
-        //    if (result)
-        //    {
-        //        Console.WriteLine("The age of the patient is updated successfully.");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Something went wrong. Try again!");
-        //    }
+            if (result)
+            {
+                Console.WriteLine("The age of the patient is updated successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong. Try again!");
+            }
         }
         #endregion
 
