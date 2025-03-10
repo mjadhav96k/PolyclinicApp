@@ -18,10 +18,10 @@ namespace PolyclinicApp.ConsoleApp
         static void Main(string[] args)
         {
             //TestAddNewPatientDetails(); 
-            //TestCalculateDoctorFees();  
+            //TestCalculateDoctorFees();
             //TestCancelAppointment();  
             //TestFetchAllAppointments();
-            //TestGetDoctorAppointmentUsingUSP();  
+            TestGetDoctorAppointmentUsingUSP();
             //TestGetPatientDetails(); 
             //TestUpdatePatientAge(); 
 
@@ -54,16 +54,16 @@ namespace PolyclinicApp.ConsoleApp
         #region TestCalculateDoctorFees
         public static void TestCalculateDoctorFees()
         {
-        //    decimal result = repository.CalculateDoctorFees("D2", new DateTime(2023, 01, 02));
+            decimal result = repository.CalculateDoctorFees("D1", new DateTime(2025, 03, 20)); //2025-03-20
 
-        //    if (result > 0)
-        //    {
-        //        Console.WriteLine("The fees of the doctor  is calculated successfully and the charge is Rs." + result + " only.");
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Something went wrong. Try again! Enter a valid DoctorId.");
-        //    }
+            if (result > 0)
+            {
+                Console.WriteLine("The fees of the doctor  is calculated successfully and the charge is Rs." + result + " only.");
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong. Try again! Enter a valid DoctorId.");
+            }
         }
         #endregion
 
@@ -101,17 +101,17 @@ namespace PolyclinicApp.ConsoleApp
         #region TestGetDoctorAppointmentUsingUSP
         public static void TestGetDoctorAppointmentUsingUSP()
         {
-            //int appointmentNo = 0;
-            //int returnResult = repository.GetDoctorAppointment("P105", "D1", DateTime.Today, out appointmentNo);
+            int appointmentNo = 0;
+            int returnResult = repository.GetDoctorAppointment("P105", "D1", DateTime.Today, out appointmentNo);
 
-            //if (returnResult > 0)
-            //{
-            //    Console.WriteLine("Appointment placed successfully and AppointmentNo = " + appointmentNo + ".");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Some error occurred. Try again!");
-            //}
+            if (returnResult > 0)
+            {
+                Console.WriteLine("Appointment placed successfully and AppointmentNo = " + appointmentNo + ".");
+            }
+            else
+            {
+                Console.WriteLine("Some error occurred. Try again!");
+            }
         }
         #endregion
 
