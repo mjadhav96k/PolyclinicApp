@@ -4,8 +4,10 @@ using PolyclinicApp.ClassLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace PolyclinicApp.ClassLibrary
 {
@@ -92,7 +94,31 @@ namespace PolyclinicApp.ClassLibrary
                 throw;
             }
             return appointments;
-        } 
+        }
+
+        public decimal CalculateDoctorFees(string doctorId, DateTime date)
+        {
+            decimal fee = -1;
+            try
+            {
+                //Query Syntax
+                //fee = (from f 
+                //       in context.Doctors 
+                //       select PolyclinicDbContext.ufn_CalculateDoctorFees(doctorId, date))
+                //       .FirstOrDefault();
+                //Method Syntax
+                fee = context.Appointments
+                    .Select(d => PolyclinicDbContext.ufn_CalculateDoctorFees(doctorId, date))
+                    .FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return fee;
+        }
+
+
 
     }
 }

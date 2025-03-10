@@ -101,8 +101,18 @@ public partial class PolyclinicDbContext : DbContext
 
         modelBuilder.Entity<ListOfAppointments>().HasNoKey();
 
+        modelBuilder.HasDbFunction(typeof(PolyclinicDbContext).GetMethod(nameof(ufn_CalculateDoctorFees), new[] {typeof(string), typeof(DateTime)} ))
+            .HasName("ufn_CalculateDoctorFees")
+            .HasSchema("dbo");
+
         OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    [DbFunction("ufn_CalculateDoctorFees", "dbo")]
+    public static decimal ufn_CalculateDoctorFees(string doctorId, DateTime date)
+    {
+        throw new NotImplementedException();
+    }
 }
