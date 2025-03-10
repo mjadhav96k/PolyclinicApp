@@ -20,6 +20,7 @@ public partial class PolyclinicDbContext : DbContext
     public virtual DbSet<Doctor> Doctors { get; set; }
 
     public virtual DbSet<Patient> Patients { get; set; }
+    public virtual DbSet<ListOfAppointments> ListOfAppointments { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -98,8 +99,20 @@ public partial class PolyclinicDbContext : DbContext
                 .IsUnicode(false);
         });
 
+        modelBuilder.Entity<ListOfAppointments>().HasNoKey();
+
+        modelBuilder.HasDbFunction(typeof(PolyclinicDbContext).GetMethod(nameof(ufn_CalculateDoctorFees), new[] {typeof(string), typeof(DateTime)} ))
+            .HasName("ufn_CalculateDoctorFees")
+            .HasSchema("dbo");
+
         OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    [DbFunction("ufn_CalculateDoctorFees", "dbo")]
+    public static decimal ufn_CalculateDoctorFees(string doctorId, DateTime date)
+    {
+        throw new NotImplementedException();
+    }
 }
