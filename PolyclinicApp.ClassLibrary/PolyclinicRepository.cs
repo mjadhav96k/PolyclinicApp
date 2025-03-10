@@ -118,6 +118,38 @@ namespace PolyclinicApp.ClassLibrary
             return fee;
         }
 
+        public int GetDoctorAppointment(string patienId, string doctorId, DateTime dateOfAppointment, out int appointmentNo)
+        {
+            int returnResult = 0;
+            appointmentNo = 0;
+            int noOfRowsAffected = 0;
+
+            SqlParameter prmPatientId = new SqlParameter("@PatientID", patienId);
+            SqlParameter prmDoctorId = new SqlParameter("@DoctorID", doctorId);
+            SqlParameter prmDateOfAppointment = new SqlParameter("@DateOfAppointment", dateOfAppointment);
+            
+            SqlParameter prmappointmentNo = new SqlParameter("@AppointmentNo", System.Data.SqlDbType.Int);
+            prmappointmentNo.Direction = System.Data.ParameterDirection.Output;
+
+            SqlParameter prmResult = new SqlParameter("@ReturnResult", System.Data.SqlDbType.Int);
+            prmResult.Direction = System.Data.ParameterDirection.Output;
+
+            try
+            {
+                noOfRowsAffected = context.Database.ExecuteSqlRaw("EXEC @ReturnResult = dbo.usp_GetDoctorAppointment @PatientID, @DoctorID, @DateOfAppointment, @AppointmentNo OUTPUT", prmResult, prmPatientId, prmDoctorId, prmDateOfAppointment, prmappointmentNo);
+                returnResult = Convert.ToInt32(prmResult.Value);
+                appointmentNo = Convert.ToInt32(prmappointmentNo.Value);
+            }
+            catch (Exception)
+            {
+                appointmentNo = 0;
+                noOfRowsAffected = -1;
+                returnResult = -99;
+                throw;
+            }
+            return returnResult;
+        }
+
 
 
     }
